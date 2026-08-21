@@ -35,31 +35,8 @@ function stopCommand() {
   return ["systemctl", "--user", "stop", PRIMARY_UNIT, LEGACY_UNIT]
 }
 
-function stayAwakeCommand(enable) {
-  return ["omarchy", "toggle", "idle", enable ? "stay-awake" : "allow-idle"]
-}
-
-function tooltip(sleepBlocked, stayAwake) {
-  if (sleepBlocked && stayAwake)
-    return "Keep On · sleeping blocked, screen stays on\nRight-click to allow sleep"
+function tooltip(sleepBlocked) {
   if (sleepBlocked)
-    return "Keep On · sleeping blocked\nRight-click to allow sleep"
-  if (stayAwake)
-    return "Keep On · screen stays on\nRight-click to block sleep"
-  return "Keep On · machine can sleep\nRight-click to block sleep"
-}
-
-function heroMeta(sleepBlocked, stayAwake) {
-  var parts = []
-  if (sleepBlocked) parts.push("Don't sleep")
-  if (stayAwake) parts.push("Screen on")
-  return parts.length ? parts.join(" · ") : "Machine can sleep"
-}
-
-function heroDetail(sleepBlocked, stayAwake) {
-  return (sleepBlocked || stayAwake) ? "ON" : "OFF"
-}
-
-function barActive(sleepBlocked, stayAwake) {
-  return !!(sleepBlocked || stayAwake)
+    return "Don't sleep · sleeping blocked\nClick to allow sleep"
+  return "Don't sleep · machine can sleep\nClick to block sleep"
 }

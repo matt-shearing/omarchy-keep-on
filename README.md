@@ -1,18 +1,17 @@
 # Keep On
 
-![Keep On panel on the Omarchy bar](preview.png)
+![Don't sleep chip on the Omarchy bar](preview.png)
 
 Stop this machine sleeping while a job runs. The screen can still blank.
 
-Keep On is an [Omarchy](https://omarchy.org) bar applet. **Don't sleep** holds a
-user-session inhibit so suspend cannot fire. **Keep screen on** is the first-party
-idle override: no screensaver, no lock. The two are independent. Overnight copies
-and compiles want the first; a presentation wants both.
+Keep On is a single [Omarchy](https://omarchy.org) bar chip. Click it to hold a
+user-session inhibit so suspend cannot fire. Screensaver, lock, and display
+blanking still run on their usual idle timers.
 
-Omarchy already ships **Stay Awake** inside `omarchy.indicators`. Hover the center
-indicators to see the coffee mark. That control only skips lock and screensaver, so
-the panel stays lit. It does not block systemd suspend, and it hides until you
-hover. Keep On is the always-visible control for the job that has to finish.
+Omarchy already ships **Stay Awake** in the centre indicators (Super+Ctrl+I).
+That skips lock and screensaver so the panel stays lit. It does not block
+systemd suspend. Use Stay Awake for a presentation; use this for a copy or
+compile you want to leave running.
 
 No sudo or pkexec is required. The inhibit is a transient systemd user unit. It
 dies on reboot.
@@ -23,26 +22,17 @@ dies on reboot.
 omarchy plugin add https://github.com/matt-shearing/omarchy-keep-on.git --enable
 ```
 
-That clones the plugin and can place the widget on the right side of the bar,
-next to Power.
+That clones the plugin and can place the chip in the centre of the bar, to the
+left of the clock.
 
 ## Use
 
-- **Click** the chip — open the panel
-- **Right-click** — toggle Don't sleep
-- **Middle-click** — toggle Keep screen on
-
-**Don't sleep** blocks suspend and lid-switch sleep. Screensaver, lock, and
-display blanking still run on their usual idle timers.
-
-**Keep screen on** calls the same idle service as Stay Awake. The hover coffee
-mark lights when this is on.
-
-The chip is bright while either toggle is on, dim when both are off.
+Click the chip to block sleep. Click again to allow it. The mark is bright while
+sleep is blocked, dim when the machine can sleep.
 
 ## How it works
 
-Don't sleep starts:
+Turning it on starts:
 
 ```sh
 systemd-run --user --collect --unit=contra-keep-on \
@@ -52,9 +42,6 @@ systemd-run --user --collect --unit=contra-keep-on \
 
 Turning it off stops `contra-keep-on.service`. An older overnight unit named
 `overnight-no-sleep.service` is stopped too, if it is still around.
-
-Keep screen on writes the Stay Awake state file through `omarchy.idle`, or falls
-back to `omarchy toggle idle stay-awake` / `allow-idle`.
 
 Nothing in `~/.config` is rewritten except the bar layout entry Omarchy adds when
 you enable the plugin.
