@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "contra.keep-on",
+  "name": "Keep On",
+  "version": "1.0.0",
+  "author": "contra",
+  "license": "MIT",
+  "description": "Block suspend from the bar so a job keeps running. The screen can still blank unless you keep it on.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "Keep On",
+    "description": "Stop the machine sleeping while a job runs. Screen-off stays allowed.",
+    "category": "System",
+    "aliases": [
+      "caffeine",
+      "nosleep",
+      "stay-awake",
+      "inhibit"
+    ],
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}
