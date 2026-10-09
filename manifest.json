@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "contra.keep-on",
   "name": "Keep On",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "contra",
   "license": "MIT",
   "description": "Block suspend from the bar so a job keeps running. The screen can still blank.",

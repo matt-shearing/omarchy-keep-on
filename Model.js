@@ -32,7 +32,11 @@ function startCommand() {
 }
 
 function stopCommand() {
-  return ["systemctl", "--user", "stop", PRIMARY_UNIT, LEGACY_UNIT]
+  // One stop per unit: systemctl refuses the whole list if any unit is not loaded.
+  return ["bash", "-c",
+    "systemctl --user stop " + PRIMARY_UNIT + "; " +
+    "systemctl --user stop " + LEGACY_UNIT + " >/dev/null 2>&1 || true"
+  ]
 }
 
 function tooltip(sleepBlocked) {
